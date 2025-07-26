@@ -3,7 +3,7 @@
 ### ARDUINO® power connector (CN6) pinout
 
 
-| Pin           | Pin name      | Signal name | STM32 pin | MCU function |
+| Pin           | Pin label      | Signal name | STM32 pin | Additional function |
 | ------------- | ------------- | ----------- | --------- | ------------ |
 | 1             | NC            | NC          | -         | RESERVED     |
 | 2             | IOREF         | IOREF       | -         | I/O REF      |
@@ -16,7 +16,7 @@
 
 ### ARDUINO® ADC connector (CN8) pinout
 
-| Pin           | Pin name      | Signal name | STM32 pin | MCU function |
+| Pin           | Pin label      | Signal name | STM32 pin | Additional function |
 | ------------- | ------------- | ----------- | --------- | ------------ |
 | 1             | A0            | ADC         | PA0         | ADC1_IN5   |
 | 2             | A1            | ADC         | PA1         | ADC1_IN6   |
@@ -27,7 +27,7 @@
 
 ### ARDUINO® D[7-0] connector (CN9) pinout
 
-| Pin           | Pin name      | Signal name | STM32 pin | MCU function |
+| Pin           | Pin label      | Signal name | STM32 pin | Additional function |
 | ------------- | ------------- | ----------- | --------- | ------------ |
 | 1             | D7            | IO          | PA8       | I/O          |
 | 2             | D6            | PWM         | PB10      | TIM2_CH3     |
@@ -40,7 +40,7 @@
 
 ### ARDUINO® D[15-8] connector (CN5) pinout
 
-| Pin           | Pin name      | Signal name | STM32 pin | MCU function |
+| Pin           | Pin label      | Signal name | STM32 pin | Additional function |
 | ------------- | ------------- | ----------- | --------- | ------------ |
 | 1             | D15           | I2C_SCL     | PB6       | I2C1_SCL/I2C4_SCL|
 | 2             | D14           | I2C_SDA     | PB7       | I2C1_SDA/I2C4_SDA |
