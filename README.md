@@ -52,3 +52,5 @@
 | 8             | D10           | SPI_NSS/PWM  | PC9      | SPI_NSS/TIM3_CH4|
 | 9             | D9            | PWM          | PC6      | TIM3_CH1       |
 | 10            | D8            | IO           | PC7      | -              |
+
+More informations can be found [here](https://www.st.com/en/evaluation-tools/nucleo-u545re-q.html?ecmp=tt9470_gl_link_feb2019&rt=um&id=UM3062#overview).
