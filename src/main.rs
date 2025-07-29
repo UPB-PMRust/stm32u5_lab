@@ -15,7 +15,7 @@ async fn main(_spawner: Spawner) -> ! {
     // let pins = nucleo_stm32u545re_q::BoardPins::new(p);
     info!("Hello World!");
 
-    let d13_pin: nucleo_stm32u545re_q::D13 = p.PA5; // Adjust this pin according to your board's LED pin
+    let d13_pin = nucleo_stm32u545re_q::D13;
 
     // replace PC13 with the right pin for your board.
     let mut led = Output::new(d13_pin, Level::Low, Speed::Medium);
