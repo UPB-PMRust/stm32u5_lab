@@ -12,12 +12,10 @@ mod nucleo_stm32u545re_q;
 #[embassy_executor::main]
 async fn main(_spawner: Spawner) -> ! {
     let p = embassy_stm32::init(Default::default());
-    // let pins = nucleo_stm32u545re_q::BoardPins::new(p);
     info!("Hello World!");
 
     let d13_pin = nucleo_stm32u545re_q::D13;
 
-    // replace PC13 with the right pin for your board.
     let mut led = Output::new(d13_pin, Level::Low, Speed::Medium);
 
     loop {
