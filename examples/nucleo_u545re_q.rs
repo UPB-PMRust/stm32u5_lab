@@ -30,4 +30,4 @@ pub type D15 = embassy_stm32::peripherals::PB6;
 // pub user_led: embassy_stm32::peripherals::PA5,
 
 //Buttons
-pub type User_Button = embassy_stm32::peripherals::PC13;
+pub type user_button = embassy_stm32::peripherals::PC13;
