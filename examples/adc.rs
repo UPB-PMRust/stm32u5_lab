@@ -6,12 +6,10 @@ use embassy_stm32::adc;
 use embassy_stm32::adc::{AdcChannel, adc4};
 use {defmt_rtt as _, panic_probe as _};
 
-mod nucleo_u545re_q; // Import the board-specific module
-
 #[embassy_executor::main]
 async fn main(_spawner: embassy_executor::Spawner) {
     let p = embassy_stm32::init(Default::default());
-    let mut adc_pin: nucleo_u545re_q::A0 = p.PA0;
+    let mut adc_pin = p.PA0;
 
     info!("Board initialized!");
 
