@@ -11,12 +11,8 @@ use embassy_stm32::timer::simple_pwm::{PwmPin, SimplePwm};
 use embassy_time::Timer;
 use {defmt_rtt as _, panic_probe as _};
 
-mod nucleo_u545re_q; // Import the board-specific module
-
 #[embassy_executor::main]
 async fn main(_spawner: Spawner) {
-    let p = embassy_stm32::init(Default::default());
-    let pwm_pin: nucleo_u545re_q::A0 = p.PA0;
 
     info!("Board initialized!");
 
@@ -25,7 +21,7 @@ async fn main(_spawner: Spawner) {
         '_,
         embassy_stm32::peripherals::TIM2,
         embassy_stm32::timer::simple_pwm::Ch1,
-    > = PwmPin::new_ch1(pwm_pin, OutputType::PushPull);
+    > = PwmPin::new_ch1(p.PA0, OutputType::PushPull);
 
     let mut pwm_led = SimplePwm::new(
         p.TIM2,
@@ -44,3 +40,4 @@ async fn main(_spawner: Spawner) {
         ch1.set_duty_cycle(10); // Set duty cycle to 10%
     }
 }
+
