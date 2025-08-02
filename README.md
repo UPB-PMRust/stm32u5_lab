@@ -55,3 +55,17 @@
 | 10  | D8        | IO           | PC7       | -                   |
 
 More informations can be found [here](https://www.st.com/en/evaluation-tools/nucleo-u545re-q.html?ecmp=tt9470_gl_link_feb2019&rt=um&id=UM3062#overview).
+
+## Examples:
+
+### Blinky
+
+This example demonstrates the most basic embedded program: blinking an LED. It configures GPIO pin `PA5` as an output and asynchronously toggles it every 200 milliseconds, printing the state to the console.
+
+### ADC
+
+This example demonstrates how to read an analog voltage using the ADC on an STM32 microcontroller. It continuously samples a voltage on pin `PA0`, converts the raw 14-bit reading to a voltage value, and prints it to the console using `defmt`.
+
+### PWM
+
+This example demonstrates how to generate a basic PWM (Pulse-Width Modulation) signal on an STM32 microcontroller. It configures Timer 2 (`TIM2`) to produce a 1 kHz signal on pin `PA0` with a fixed 10% duty cycle, which is useful for tasks like dimming an LED.
