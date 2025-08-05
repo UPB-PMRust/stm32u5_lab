@@ -17,12 +17,19 @@ fn main() -> ! {
     let mut spi_config = Config::default();
     spi_config.frequency = Hertz(1_000_000);
 
-    let mut spi = Spi::new_blocking(p.SPI1, p.PA5, p.PA7, p.PA6, spi_config);
-
-    let mut cs = Output::new(p.PA8, Level::High, Speed::VeryHigh);
+    let mut spi = Spi::new(
+        p.SPI1,
+        p.PA5,
+        p.PA7,
+        p.PA6,
+        p.GPDMA1_CH0,
+        p.GPDMA1_CH1,
+        spi_config,
+    );
+    let mut cs = Output::new(p.PC9, Level::High, Speed::VeryHigh);
 
     loop {
-        let tx_buf: [u16; 1] = [0x3B | 0x80]; // Read command
+        let tx_buf: [u8; 1] = [0x3B | 0x80]; // Read command
         let mut rx_buf = [0u8; 14]; // Receive buffer
 
         cs.set_low();
