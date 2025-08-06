@@ -28,45 +28,30 @@ async fn main(_spawner: Spawner) {
     info!("Hello");
 
     let mut config = Config::default();
-
-    // Setup the RCC (Clocks) so that we can use the USB
     {
         use embassy_stm32::rcc::*;
-        config.rcc.hse = Some(Hse {
-            freq: Hertz(8_000_000),
-            mode: HseMode::Bypass,
-        });
-        config.rcc.pll_src = PllSource::HSE;
-        config.rcc.pll1 = Some(Pll {
-            prediv: PllPreDiv::DIV4,
-            mul: PllMul::MUL168,
-            divp: Some(PllPDiv::DIV2), // 8mhz / 4 * 168 / 2 = 168Mhz.
-            divq: Some(PllQDiv::DIV7), // 8mhz / 4 * 168 / 7 = 48Mhz.
-            divr: None,
-        });
-        config.rcc.ahb_pre = AHBPrescaler::DIV1;
-        config.rcc.apb1_pre = APBPrescaler::DIV4;
-        config.rcc.apb2_pre = APBPrescaler::DIV2;
-        config.rcc.sys = Sysclk::PLL1_P;
-        config.rcc.mux.clk48sel = mux::Clk48sel::PLL1_Q;
-    }
 
+        // Do not configure HSE or PLLs.
+        config.rcc.hsi = true;
+        config.rcc.sys = Sysclk::HSI; // System clock is now 16MHz
+
+        config.rcc.hsi48 = Some(Hsi48Config {
+            sync_from_usb: false, // Must be false
+        });
+
+        config.rcc.mux.iclksel = mux::Iclksel::HSI48;
+
+        config.rcc.voltage_range = VoltageScale::RANGE2;
+    }
     // make sure you provide the `config` parameter here instead of `Default::default()`
     let peripherals = embassy_stm32::init(config);
 
     let mut ep_out_buffer = [0u8; 256];
-    let mut config = embassy_stm32::usb::Config::default();
+    // let mut config = embassy_stm32::usb::Config::default();
 
-    config.vbus_detection = false;
+    // config.vbus_detection = false;
 
-    let driver = Driver::new_fs(
-        peripherals.USB,
-        Irqs,
-        peripherals.PA12,
-        peripherals.PA11,
-        &mut ep_out_buffer,
-        config,
-    );
+    let driver = Driver::new(peripherals.USB, Irqs, peripherals.PA12, peripherals.PA11);
 
     // Create embassy-usb Config
     let mut config = UsbConfig::new(0xc0de, 0xcafe);
@@ -98,12 +83,12 @@ async fn main(_spawner: Spawner) {
     // can be used by libusb/rusb software without needing a custom driver or INF file.
     // In principle you might want to call msos_feature() just on a specific function,
     // if your device also has other functions that still use standard class drivers.
-    builder.msos_descriptor(windows_version::WIN8_1, 0);
-    builder.msos_feature(msos::CompatibleIdFeatureDescriptor::new("WINUSB", ""));
-    builder.msos_feature(msos::RegistryPropertyFeatureDescriptor::new(
-        "DeviceInterfaceGUIDs",
-        msos::PropertyData::RegMultiSz(DEVICE_INTERFACE_GUIDS),
-    ));
+    // builder.msos_descriptor(windows_version::WIN8_1, 0);
+    // builder.msos_feature(msos::CompatibleIdFeatureDescriptor::new("WINUSB", ""));
+    // builder.msos_feature(msos::RegistryPropertyFeatureDescriptor::new(
+    //     "DeviceInterfaceGUIDs",
+    //     msos::PropertyData::RegMultiSz(DEVICE_INTERFACE_GUIDS),
+    // ));
 
     // Add a vendor-specific function (class 0xFF), and corresponding interface,
     // that uses our custom handler.
