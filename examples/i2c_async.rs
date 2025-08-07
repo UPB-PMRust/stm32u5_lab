@@ -28,8 +28,8 @@ async fn main(_spawner: Spawner) {
         p.PB8,
         p.PB7,
         Irqs,
-        p.DMA1_CH6,
-        p.DMA1_CH0,
+        p.GPDMA1_CH0,
+        p.GPDMA1_CH1,
         Hertz(100_000),
         Default::default(),
     );
