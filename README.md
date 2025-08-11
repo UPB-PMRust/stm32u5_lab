@@ -69,3 +69,15 @@ This example demonstrates how to read an analog voltage using the ADC on an STM3
 ### PWM
 
 This example demonstrates how to generate a basic PWM (Pulse-Width Modulation) signal on an STM32 microcontroller. It configures Timer 2 (`TIM2`) to produce a 1 kHz signal on pin `PA0` with a fixed 10% duty cycle, which is useful for tasks like dimming an LED.
+
+### SPI ASYNC
+
+This example demonstrates how to perform asynchronous SPI (Serial Peripheral Interface) communication using DMA (Direct Memory Access) on an STM32 microcontroller with the Embassy framework. It configures the `SPI1` peripheral to repeatedly send a string like "Hello DMA World!" and simultaneously read data into a buffer, which is useful for communicating efficiently with external devices like sensors or memory chips without blocking the CPU.
+
+### I2C ASYNC
+
+This example demonstrates how to perform asynchronous I2C communication using DMA and interrupts on an STM32 microcontroller with the Embassy framework. It configures `I2C1` to continuously read a 4-byte data packet from a sensor, then processes the raw data into a meaningful signed integer value, which is useful for efficiently polling external peripherals without blocking the CPU.
+
+### USB
+
+This example demonstrates how to implement a vendor-specific USB bulk device on an STM32 microcontroller using the Embassy framework. It configures the necessary clocks (`HSI48`) and the USB peripheral to create a device with bulk endpoints that performs a simple loopback, echoing any data it receives from the host. This serves as a foundation for building custom high-throughput peripherals that can be controlled by host software using libraries like libusb or WinUSB.
