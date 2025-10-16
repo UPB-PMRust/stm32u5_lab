@@ -3,10 +3,13 @@
     "rust-analyzer": {
       "initialization_options": {
         "cargo": {
-          "target": "riscv32i-unknown-none-elf",
+          "target": "thumbv8m.main-none-eabihf",
           "allTargets": false
         }
       }
     }
+  },
+  "inlay_hints": {
+    "enabled": true
   }
 }
